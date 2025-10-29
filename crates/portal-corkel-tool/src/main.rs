@@ -48,7 +48,7 @@ $AR -rcD $O/libcorkel.a $O/dlmalloc.o $O/setjmp_core.o $O/setjmp.o $O/mman.o
                     r#"
 project(corkel)
 add_library(corkel STATIC {} source/dlmalloc/src/dlmalloc.c source/lib/setjmp_core_${{CMAKE_SYSTEM_PROCESSOR}}.S)
-target_include_directories(corkel PUBLIC ${{CMAKE_CURRENT_SOURCE_DIR}}/include)
+target_include_directories(corkel PUBLIC ${{CMAKE_CURRENT_SOURCE_DIR}}/source/include)
             "#,
                     SRCS.iter().map(|a| format!("source/lib/{a}.c")).join(" ")
                 ),
