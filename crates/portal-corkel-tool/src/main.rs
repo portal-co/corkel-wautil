@@ -14,8 +14,7 @@ fn main() -> std::io::Result<()> {
             std::fs::write(
                 src_dir.join("source").join("dlmalloc").join("build.sh"),
                 format!(
-                    r#"
-#!/usr/bin/env bash
+                    r#"#!/usr/bin/env bash
 set -euxo pipefail
 R=$(dirname $0)/..
 O=${{O:-$R/../build/$ARCH}}
@@ -27,8 +26,7 @@ O=${{O:-$R/../build/$ARCH}}
             std::fs::write(
                 src_dir.join("build.sh"),
                 format!(
-                    r#"
-#!/usr/bin/env bash
+                    r#"#!/usr/bin/env bash
 set -euxo pipefail
 R=$(dirname $0)
 O=${{O:-$R/build/$ARCH}}
