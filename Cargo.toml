@@ -4,10 +4,10 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-portal-corkel-wasm-alloc = { version = "0.1.0", path = "portal-corkel-alloc", optional = true }
+portal-corkel-wasm-alloc = { version = "0.1.0", path = "crates/portal-corkel-alloc", optional = true }
 
 [workspace]
-members=["portal-corkel-alloc",".", "portal-corkel-tool"]
+members = ["crates/portal-corkel-alloc", ".", "crates/portal-corkel-tool"]
 
 [features]
 alloc = ["dep:portal-corkel-wasm-alloc"]
