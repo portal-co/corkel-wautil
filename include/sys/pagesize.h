@@ -19,3 +19,4 @@ extern char __wasm_first_page_end;
 #else
 #define PAGESIZE (0x10000)
 #endif
+#define PAGESIZE_LOG2 (__builtin_ctz(PAGESIZE))

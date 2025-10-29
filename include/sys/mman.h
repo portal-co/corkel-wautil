@@ -12,5 +12,6 @@ typedef struct CkMMANHook {
     void * userdata;
     char(*free)(void*,void*);
     void*(*alloc)(void*,void*,size_t,int,int,int,off_t);
+    void *(*sbrk)(void*,intptr_t);
 } CkMMANHook;
 extern CkMMANHook * ck_mmna_hook;

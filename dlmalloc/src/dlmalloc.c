@@ -5,9 +5,13 @@
 // #include <malloc.h>
 
 // Define configuration macros for dlmalloc.
-
+#ifdef __wasm__
 // WebAssembly doesn't have mmap-style memory allocation.
 #define HAVE_MMAP 0
+
+#else
+#define HAVE_MMAP 1
+#endif
 
 // WebAssembly doesn't support shrinking linear memory.
 #define MORECORE_CANNOT_TRIM 1

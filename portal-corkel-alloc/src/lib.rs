@@ -1,12 +1,8 @@
 #![no_std]
-
 extern crate alloc;
-
 // #[cfg(not(feature = "module-linking"))]
 pub struct CkAllocator;
-
 const MIN_ALIGN: usize = 8;
-
 // #[cfg(not(feature = "module-linking"))]
 unsafe impl alloc::alloc::GlobalAlloc for CkAllocator {
     #[inline]
@@ -21,7 +17,6 @@ unsafe impl alloc::alloc::GlobalAlloc for CkAllocator {
             aligned_alloc(layout.align(), layout.size()) as *mut u8
         }
     }
-
     #[inline]
     unsafe fn alloc_zeroed(&self, layout: alloc::alloc::Layout) -> *mut u8 {
         extern "C" {
@@ -37,7 +32,6 @@ unsafe impl alloc::alloc::GlobalAlloc for CkAllocator {
             ptr
         }
     }
-
     #[inline]
     unsafe fn dealloc(&self, ptr: *mut u8, _layout: alloc::alloc::Layout) {
         extern "C" {
@@ -45,7 +39,6 @@ unsafe impl alloc::alloc::GlobalAlloc for CkAllocator {
         }
         free(ptr as *mut core::ffi::c_void)
     }
-
     #[inline]
     unsafe fn realloc(
         &self,
@@ -61,7 +54,6 @@ unsafe impl alloc::alloc::GlobalAlloc for CkAllocator {
         } else {
             let new_layout =
                 alloc::alloc::Layout::from_size_align_unchecked(new_size, layout.align());
-
             let new_ptr = alloc::alloc::GlobalAlloc::alloc(self, new_layout);
             if !new_ptr.is_null() {
                 let size = core::cmp::min(layout.size(), new_size);
