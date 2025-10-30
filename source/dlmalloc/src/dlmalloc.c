@@ -8,7 +8,6 @@
 #ifdef __wasm__
 // WebAssembly doesn't have mmap-style memory allocation.
 #define HAVE_MMAP 0
-
 #else
 #define HAVE_MMAP 1
 #endif

@@ -16,11 +16,11 @@ fn main() -> std::io::Result<()> {
                 format!(
                     r#"#!/usr/bin/env bash
 set -euxo pipefail
-R=$(dirname $0)/..
-O=${{O:-$R/../build/$ARCH}}
+R=$(dirname $0)/../..
+O=${{O:-$R/build/$ARCH}}
 {}
             "#,
-                    build_cmd("dlmalloc", "dlmalloc/src")
+                    build_cmd("dlmalloc", "source/dlmalloc/src")
                 ),
             )?;
             std::fs::write(
@@ -29,12 +29,13 @@ O=${{O:-$R/../build/$ARCH}}
                     r#"#!/usr/bin/env bash
 set -euxo pipefail
 R=$(dirname $0)
+mkdir -p $R/zig-cache
 O=${{O:-$R/build/$ARCH}}
 mkdir -p $O
 export CFLAGS=${{CFLAGS:-}}
 $R/compile.sh -isystem $R/source/include -c -o $O/setjmp_core.o $R/source/lib/setjmp_core_$ARCH.S
 {}
-$R/dlmalloc/build.sh
+$R/source/dlmalloc/build.sh
 
 rm $O/libcorkel.a || echo "Creating Libcorkel"
 $AR -rcD $O/libcorkel.a $O/dlmalloc.o $O/setjmp_core.o $O/setjmp.o $O/mman.o
