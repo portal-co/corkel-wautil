@@ -28,8 +28,10 @@ int munmap(void *addr, size_t length) {
 #endif
   return 0;
 }
+static int did_mem_brk = 0;
 void *sbrk(intptr_t increment) {
-  if ((increment << PAGESIZE_LOG2) >> PAGESIZE_LOG2 == increment) {
+  if (!did_mem_brk &&
+      (increment << PAGESIZE_LOG2) >> PAGESIZE_LOG2 == increment) {
 #ifdef __wasm__
     // sbrk(0) returns the current memory size.
     if (increment == 0) {
@@ -59,6 +61,7 @@ void *sbrk(intptr_t increment) {
 #endif
   }
   if (ck_mman_hook) {
+    did_mem_brk = 1;
     return ck_mman_hook->sbrk(ck_mman_hook->userdata, increment);
   }
 }
