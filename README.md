@@ -1,13 +1,14 @@
 # corkel-wautil
 
 ## Description
-Project corkel-wautil
+WebAssembly utilities and toolchain setup for "Corkel", including allocation and tooling crates.
 
 ## Goals
-- [ ] Add project goals
+- [ ] Provide WASM allocation strategies
+- [ ] Configure Rust/Zig build environments for WASM
 
 ## Progress
-- [ ] Initial setup
+- [ ] Crate setup with allocator and tool members
 
 ---
 *AI assisted*
