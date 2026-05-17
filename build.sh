@@ -12,4 +12,3 @@ $R/source/dlmalloc/build.sh
 
 rm $O/libcorkel.a || echo "Creating Libcorkel"
 $AR -rcD $O/libcorkel.a $O/dlmalloc.o $O/setjmp_core.o $O/setjmp.o $O/mman.o
-                
